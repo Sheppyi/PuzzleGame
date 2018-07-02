@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731224, g: 0.38074207, b: 0.3587267, a: 1}
+  m_IndirectSpecularColor: {r: 0.37312198, g: 0.38074183, b: 0.35872635, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -164,8 +164,8 @@ GameObject:
   - component: {fileID: 78977094}
   - component: {fileID: 78977095}
   m_Layer: 0
-  m_Name: tile background blue transparent
-  m_TagString: Untagged
+  m_Name: PlayFieldBackGround
+  m_TagString: PlayFieldBackGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,8 +180,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1249474877}
-  m_RootOrder: 0
+  m_Father: {fileID: 1905054065}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &78977095
 SpriteRenderer:
@@ -490,8 +490,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 78977094}
+  m_Children: []
   m_Father: {fileID: 1905054065}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -610,6 +609,7 @@ Transform:
   - {fileID: 282840814}
   - {fileID: 1657336457}
   - {fileID: 1249474877}
+  - {fileID: 78977094}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
