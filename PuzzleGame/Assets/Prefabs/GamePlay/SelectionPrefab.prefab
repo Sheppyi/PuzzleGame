@@ -52,8 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21db200d1f2b414bbf5f5c25d64fd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  furnaceSprite: {fileID: 21300000, guid: 52c528f4a3fa7cf48b7a436f5de00f10, type: 3}
+  furnaceSprite: {fileID: 21300000, guid: 9df2c75c17bfb9f45b910b8020707db1, type: 3}
   furnacePrefab: {fileID: 1826707730620464, guid: 96eaf926a68af144ba5667ba698225c7,
+    type: 2}
+  conveyorSprite: {fileID: 21300000, guid: 81456e3bb423a474b8e97d61f500abd7, type: 3}
+  conveyorPrefab: {fileID: 1845156146607154, guid: 73c2ecb9e2519a04697ab9807ae02180,
     type: 2}
 --- !u!212 &212422103171340588
 SpriteRenderer:

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37312198, g: 0.38074183, b: 0.35872635, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731224, g: 0.38074207, b: 0.3587267, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -504,6 +504,7 @@ GameObject:
   - component: {fileID: 1657336457}
   - component: {fileID: 1657336456}
   - component: {fileID: 1657336458}
+  - component: {fileID: 1657336459}
   m_Layer: 0
   m_Name: PlayFieldForeGround
   m_TagString: PlayFieldForeGround
@@ -581,6 +582,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selection: {fileID: 1345940044704586, guid: 57354fb1521daec418c84b91d197d3d1, type: 2}
+--- !u!114 &1657336459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1657336455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8db9af12a7056d4ea5751f770d12072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxTimer: 0.05
 --- !u!1 &1905054064
 GameObject:
   m_ObjectHideFlags: 0

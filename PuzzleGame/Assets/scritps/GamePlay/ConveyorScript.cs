@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FurnaceScript : MonoBehaviour
+public class ConveyorScript : MonoBehaviour
 {
-
-
-  
+    
 }
+
+
+
+    
