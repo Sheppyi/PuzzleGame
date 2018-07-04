@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class BlockPlacer : MonoBehaviour
 {
-    public static int SelectedElement = 0;     //selected element determains which element is currently selected (duh
-    public GameObject Selection;
 
     public const int furnaceButton = 3;
     public const int conveyorButton = 2;
+    public const int spawnerButton = 1;
 
+
+
+    public static int SelectedElement = 0;     //selected element determains which element is currently selected (duh
+    public GameObject Selection;
     public static int selectionScriptRotation = 180;
     private bool isForeGround = true;
     private float foregroundDepth = -8f;
@@ -30,28 +33,35 @@ public class BlockPlacer : MonoBehaviour
 
     private void Update()
     {
-        //select element
-        if (Input.GetKeyDown(System.Convert.ToString(furnaceButton)) && SelectedElement == 0)
+        if (!GameMaster.gameRunning)
         {
-            SelectElement(furnaceButton);
-        }
-        if (Input.GetKeyDown(System.Convert.ToString(conveyorButton)) && SelectedElement == 0)
-        {
-            SelectElement(conveyorButton);
-        }
-
-        //deleting Placed Block
-        if (Input.GetMouseButtonDown(1) && SelectedElement == 0 && Physics.CheckSphere(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y,currentDepth), 0f))
-        {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit))
+            //select element
+            if (Input.GetKeyDown(System.Convert.ToString(furnaceButton)) && SelectedElement == 0)
             {
-                Destroy(hit.collider.gameObject);
+                SelectElement(furnaceButton);
             }
+            if (Input.GetKeyDown(System.Convert.ToString(conveyorButton)) && SelectedElement == 0)
+            {
+                SelectElement(conveyorButton);
+            }
+            if (Input.GetKeyDown(System.Convert.ToString(spawnerButton)) && SelectedElement == 0)
+            {
+                SelectElement(spawnerButton);
+            }
+
+
+            //deleting Placed Block
+            if (Input.GetMouseButtonDown(1) && SelectedElement == 0 && Physics.CheckSphere(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, currentDepth), 0f))
+            {
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    Destroy(hit.collider.gameObject);
+                }
+            }
+
         }
-
-
 
         //change level
         if (Input.GetKeyDown(KeyCode.Tab) && !inTabAnimation)
@@ -69,6 +79,7 @@ public class BlockPlacer : MonoBehaviour
                 currentDepth = foregroundDepth;
             }
         } 
+
         //animation
         if (inTabAnimation && remainingTime > 0)
         {
@@ -96,10 +107,10 @@ public class BlockPlacer : MonoBehaviour
             PlayFieldForeGround.GetComponent<Renderer>().enabled = true;
         }
 
-        if(0 < Camera.main.transform.position.z || Camera.main.transform.position.z > 4)
+        //prevent camera derailing
+        if(-10 > Camera.main.transform.position.z || Camera.main.transform.position.z > -6)
         {
-            Camera.main.transform.position = new Vector3(0, 0, Mathf.Clamp(Camera.main.transform.position.z, 0, 4));
-            Debug.LogWarning("Camera derailed during foreground/background switch");
+            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Mathf.Clamp(Camera.main.transform.position.z, -10, -6));
         }
 
     }

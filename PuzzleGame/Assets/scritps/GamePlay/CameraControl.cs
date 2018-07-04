@@ -18,14 +18,13 @@ public class CameraControl : MonoBehaviour
     //drift prevention
     public static float DefaultX = 2.288f;           //how far the camera can drift
     public static float DefaultY = 1.4f;            //how far the camera can drift
-    private float DefaultZ = -10;                   //default camera distance
+
 
 
     void Start()
     {
         CurrentSize = DefaultSize;
         GetComponent<Camera>().orthographicSize = CurrentSize;
-
     }
 
 
@@ -39,7 +38,7 @@ public class CameraControl : MonoBehaviour
         if (Input.GetMouseButton(2))
         {
             transform.position -= new Vector3(Input.GetAxis("Mouse X") * PanSpeed * Time.deltaTime * CurrentSize, Input.GetAxis("Mouse Y") * PanSpeed * Time.deltaTime * CurrentSize, 0);   //move camera
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -DefaultX, DefaultX), Mathf.Clamp(transform.position.y, -DefaultY, DefaultY), DefaultZ); //clamp (prevent drift)
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -DefaultX, DefaultX), Mathf.Clamp(transform.position.y, -DefaultY, DefaultY), transform.position.z); //clamp (prevent drift)
         }
 
 

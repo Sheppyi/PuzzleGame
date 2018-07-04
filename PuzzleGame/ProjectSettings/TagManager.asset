@@ -7,6 +7,8 @@ TagManager:
   - PlayFieldForeGround
   - PlayFieldBackGround
   - Element
+  - Material
+  - DestroyOnRun
   layers:
   - Default
   - TransparentFX

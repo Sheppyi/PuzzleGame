@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class AnimationMaster : MonoBehaviour {
 
-    public  float MaxTimer = 0.05f;
+    public float MaxTimer;
     private float currentTime = 0;
     public static bool AnimationSync = false;
+    public static int currentSprite;
+    private int animationFrames = 4;
     
 
-
-
-    void Start ()
-    {
-		
-	}
-	
-	
 	void Update ()
     {
         AnimationSync = false;
@@ -25,6 +19,15 @@ public class AnimationMaster : MonoBehaviour {
         {
             currentTime = 0;
             AnimationSync = true;
+        }
+
+        if (AnimationSync)
+        {
+            currentSprite++;
+            if (currentSprite >= animationFrames)
+            {
+                currentSprite = 0;
+            }
         }
     }
 }

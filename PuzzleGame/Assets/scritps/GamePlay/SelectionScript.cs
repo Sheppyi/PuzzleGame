@@ -8,6 +8,8 @@ public class SelectionScript : MonoBehaviour {
     public GameObject furnacePrefab;
     public Sprite conveyorSprite;
     public GameObject conveyorPrefab;
+    public Sprite spawnerSprite;
+    public GameObject spawnerPrefab;
 
     private int currentRotation;
 
@@ -35,6 +37,9 @@ public class SelectionScript : MonoBehaviour {
                 break;
             case BlockPlacer.furnaceButton:
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = furnaceSprite;
+                break;
+            case BlockPlacer.spawnerButton:
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = spawnerSprite;
                 break;
         }
     }
@@ -70,6 +75,11 @@ public class SelectionScript : MonoBehaviour {
             BlockPlacer.SelectedElement = BlockPlacer.conveyorButton;
             this.gameObject.GetComponent<SpriteRenderer>().sprite = conveyorSprite;
         }
+        if (Input.GetKeyDown(System.Convert.ToString(BlockPlacer.spawnerButton)))
+        {
+            BlockPlacer.SelectedElement = BlockPlacer.spawnerButton;
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = spawnerSprite;
+        }
 
         //rotating block
         if (Input.GetKeyDown(KeyCode.E))
@@ -97,14 +107,19 @@ public class SelectionScript : MonoBehaviour {
             switch (BlockPlacer.SelectedElement)
             {
                 case BlockPlacer.conveyorButton:
-                    var conveyor =Instantiate(conveyorPrefab, new Vector3(transform.position.x, transform.position.y, BlockPlacer.currentDepth), new Quaternion());
+                    var conveyor = Instantiate(conveyorPrefab, new Vector3(transform.position.x, transform.position.y, BlockPlacer.currentDepth), new Quaternion());
                     conveyor.transform.eulerAngles = new Vector3(0,0,currentRotation);
                     break;
                 case BlockPlacer.furnaceButton:
                     var furnace = Instantiate(furnacePrefab,new Vector3(transform.position.x, transform.position.y, BlockPlacer.currentDepth), new Quaternion());
                     furnace.transform.eulerAngles = new Vector3(0, 0, currentRotation);
                     break;
+                case BlockPlacer.spawnerButton:
+                    var spawner = Instantiate(spawnerPrefab, new Vector3(transform.position.x, transform.position.y, BlockPlacer.currentDepth), new Quaternion());
+                    spawner.transform.eulerAngles = new Vector3(0, 0, currentRotation);
+                    break;
             }
+
             Debug.Log("Placed block number " + BlockPlacer.SelectedElement);                // DEBUG LOG
             BlockPlacer.SelectedElement = 0;    //reset selected element
             Destroy(gameObject);    //destroy the object
