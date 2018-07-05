@@ -15,7 +15,7 @@ public class SelectionScript : MonoBehaviour {
 
 
     private Color rendColor;
-    private const float GridSize = 0.2f;    //size of the grid !SHOULD NEVER BE CHANGED!
+    public const float GridSize = 0.2f;    //size of the grid !SHOULD NEVER BE CHANGED!
     private float opacity = 0.6f;           //alpha level
 
 

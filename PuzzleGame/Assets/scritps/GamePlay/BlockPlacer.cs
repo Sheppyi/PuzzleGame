@@ -112,7 +112,6 @@ public class BlockPlacer : MonoBehaviour
         {
             Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Mathf.Clamp(Camera.main.transform.position.z, -10, -6));
         }
-
     }
 
     

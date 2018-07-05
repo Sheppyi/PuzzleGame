@@ -41,7 +41,6 @@ public class GameMaster : MonoBehaviour {
             }
         }
 
-
         //game is running
         if (gameRunning)
         {
@@ -71,11 +70,6 @@ public class GameMaster : MonoBehaviour {
 
 
 
-
-
-
-
-
     private void RunPrep()
     {
         var gameObjects = GameObject.FindGameObjectsWithTag("DestroyOnRun");
@@ -85,27 +79,128 @@ public class GameMaster : MonoBehaviour {
             BlockPlacer.SelectedElement = 0;
         }
     }
-
     private void BuildPrep()
     {
 
     }
 
 
-
-
-
-
     //collision functions
-    public static bool CheckCollisionOnSpot(Vector3 position)
+    public static bool CheckCollisionOnSpot(Vector3 position, int offSet)       //OnSpot
     {
-        bool canBePlaced;
-        if(!Physics.CheckSphere(new Vector3(position.x, position.y, position.z - 1), 0f))
-        { canBePlaced = true; }
+        bool isFree;
+        if(!Physics.CheckSphere(new Vector3(position.x, position.y, position.z + offSet), 0f))
+        { isFree = true; }
         else
-        { canBePlaced = false;}
-        return (canBePlaced);
+        { isFree = false;}
+        return (isFree);
     }
+
+    public static bool CheckCollisionRight(Vector3 position, int offSet)       //Right
+    {
+        bool isFree;
+        if (!Physics.CheckSphere(new Vector3(position.x + SelectionScript.GridSize, position.y, position.z + offSet), 0f))
+        { isFree = true; }
+        else
+        { isFree = false; }
+        return (isFree);
+    }
+
+
+
+    //moving functions;
+    public static void MoveMaterial(Vector3 startPosition, string direction)
+    {
+        Debug.Log("Moving initiated");
+        startPosition.z--;
+        Vector3 endPosition;
+        if (direction == "Right")
+        {
+            endPosition = new Vector3(startPosition.x + SelectionScript.GridSize, startPosition.y, startPosition.z);
+        }
+        else
+        {
+            return;
+        }
+
+        bool done = false;
+        int blocksToMove = 1;
+        Vector3 finalPosition = endPosition;
+        while (!done)
+        {
+            done = true;
+            if (Physics.CheckSphere(finalPosition, 0f))
+            {
+                blocksToMove++;
+                done = false;
+                switch (direction)
+                {
+                    case "Right":
+                        finalPosition.x += SelectionScript.GridSize;
+                        break;
+                    case "Left":
+                        finalPosition.x -= SelectionScript.GridSize;
+                        break;
+                    case "Up":
+                        finalPosition.y += SelectionScript.GridSize;
+                        break;
+                    case "Down":
+                        finalPosition.y -= SelectionScript.GridSize;
+                        break;
+                }
+            }
+        }
+        Vector3 collisionPosition = finalPosition;
+        switch (direction)
+        {
+            case "Right":
+                collisionPosition.x -= SelectionScript.GridSize;
+                break;
+            case "Left":
+                collisionPosition.x += SelectionScript.GridSize;
+                break;
+            case "Up":
+                collisionPosition.y -= SelectionScript.GridSize;
+                break;
+            case "Down":
+                collisionPosition.y += SelectionScript.GridSize;
+                break;
+        }
+        //actual moving
+        while (blocksToMove > 0)
+        {
+            Debug.Log("blocks to move = " + blocksToMove);
+            blocksToMove--;
+            Collider[] toBeMoved = Physics.OverlapSphere(collisionPosition, 0f);
+            toBeMoved[0].gameObject.GetComponent<MaterialScript>().moveToPosition(finalPosition);
+
+            switch (direction)
+            {
+                case "Right":
+                    finalPosition.x -= SelectionScript.GridSize;
+                    collisionPosition.x -= SelectionScript.GridSize;
+                    break;
+                case "Left":
+                    finalPosition.x += SelectionScript.GridSize;
+                    collisionPosition.x += SelectionScript.GridSize;
+                    break;
+                case "Up":
+                    finalPosition.y -= SelectionScript.GridSize;
+                    collisionPosition.y -= SelectionScript.GridSize;
+                    break;
+                case "Down":
+                    finalPosition.y += SelectionScript.GridSize;
+                    collisionPosition.y += SelectionScript.GridSize;
+                    break;
+            }
+
+        }
+
+    }
+
+
+
+
 
 
 

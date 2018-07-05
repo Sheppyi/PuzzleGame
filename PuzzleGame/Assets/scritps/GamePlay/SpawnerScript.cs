@@ -29,7 +29,7 @@ public class SpawnerScript : MonoBehaviour {
 
     private void Spawn()
     {
-        if (GameMaster.CheckCollisionOnSpot(transform.position))
+        if (GameMaster.CheckCollisionOnSpot(transform.position, -1))
         {
             switch(selectedSpawn)
             {
@@ -37,17 +37,12 @@ public class SpawnerScript : MonoBehaviour {
                     Instantiate(woodPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z - 1), new Quaternion());
                     break;
             }
+
+            GameMaster.MoveMaterial(transform.position,"Right");
         }
         else
         {
             Debug.Log("CannotSpawn");
         }
     }
-
-
-
-
-
 }
-
-
